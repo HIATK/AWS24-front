@@ -1,0 +1,109 @@
+/* PostList.module.css */
+.postsList {
+  width: 100%;
+}
+
+.post {
+  background-color: #444;
+  padding: 1rem;
+  margin-bottom: 10px;  
+  border-radius: 8px;
+  color: #fff;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.postHeader,
+.postBody {
+  display: flex;
+  align-items: center;
+}
+
+.profileImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: -10px;
+  margin-bottom: -10px;
+  display: flex;
+  align-items: center;
+}
+
+.postNick {
+  width: 80px; /* Set a fixed width */
+  margin-right: 10px;
+  margin-left: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.postContent {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 10px;
+}
+
+.expanded .postContent {
+  white-space: pre-wrap; /* 추가 */
+  word-break: break-word; /* 추가 */
+}
+
+.star {
+  font-size: 1.5rem;
+  color: yellow;
+  margin-right: 0.2rem;
+  margin-top: -10px;
+  margin-bottom: -10px;
+  display: flex;
+  align-items: center;
+}
+
+.postDate {
+  margin-right: 10px;
+}
+
+.observer {
+  width: 100%;
+  height: 10px;
+}
+
+.postFooter {
+  display: flex;
+  align-items: center;
+}
+
+.deleteButton {
+  color: aqua;
+  font-size: 2rem;
+  margin-left: 6px;
+  margin-right: -7px;
+  margin-top: -10px;
+  margin-bottom: -10px;
+  display: flex;
+  align-items: center;
+}
+
+.cursorPointer {
+  cursor: pointer;
+}
+
+.observer {
+  width: 100%;
+  height: 20px; /* 높이를 좀 더 크게 설정 */
+  background-color: transparent; /* 시각적으로 보이지 않도록 설정 */
+  position: relative; /* 위치 조정을 위해 relative로 설정 */
+  bottom: 0; /* 화면의 맨 아래에 위치하도록 설정 */
+}

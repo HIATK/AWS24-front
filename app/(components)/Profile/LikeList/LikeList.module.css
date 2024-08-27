@@ -1,0 +1,58 @@
+
+.section {
+    /*내가남긴리뷰 좋아요 누른 영화 부분 색상*/
+    background-color: rgba(44, 44, 44, 0.7);
+    /*background-color: var(--background);*/
+    border-radius: 10px;
+    padding: 20px;
+    flex: 1;
+}
+
+.sectionTitle {
+    text-align: center;
+    margin-bottom: 1px;
+    font-weight: bold;
+}
+
+
+.sliderWrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    cursor: grab;
+    scroll-behavior: smooth; /* 부드러운 스크롤 효과 */
+}
+
+.sliderWrapper::-webkit-scrollbar {
+    display: none; /* WebKit */
+}
+
+.sliderWrapper:active {
+    cursor: grabbing;
+}
+
+.movieItems {
+    display: inline-flex;
+    transition: transform 0.3s ease; /* 부드러운 이동 효과 */
+}
+
+.movieItem {
+    flex: 0 0 200px;
+    margin: 20px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.movieImg {
+    width: 100*(23/24)%;
+    height: 287.5px;
+    object-fit: cover;
+    transition: transform 0.2s ease;
+}
+
+.movieImg:hover {
+    transform: scale(1.05);
+}
