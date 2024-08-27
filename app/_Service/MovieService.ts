@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:8000/api/movies";
+const API_BASE_URL = "http://13.125.35.67:8000/api/movies";
 
 export const getNowPlaying = async () => {
   try {

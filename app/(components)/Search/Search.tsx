@@ -23,7 +23,7 @@ const Search = () => {
   const fetchResults = async (searchTerm: string, page: number) => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:8000/api/movies/search?keyword=${encodeURIComponent(searchTerm)}&page=${page}`);
+      const response = await fetch(`http://13.125.35.67:8000/api/movies/search?keyword=${encodeURIComponent(searchTerm)}&page=${page}`);
       if (response.ok) {
         const data = await response.json();
         if (Array.isArray(data)) {
@@ -52,7 +52,7 @@ const Search = () => {
 
   useEffect(() => {
     const currentURL = window.location.href;
-    const expectedURL = `http://localhost:3000/movies/search?keyword=${encodeURIComponent(searchTerm)}`;
+    const expectedURL = `http://13.125.35.67:3000/movies/search?keyword=${encodeURIComponent(searchTerm)}`;
 
     if (currentURL === expectedURL && (prevSearchTermRef.current !== searchTerm || !initialFetchRef.current)) {
       resetSearch();

@@ -60,13 +60,13 @@ const Login: React.FC = () => {
         <div className={styles.socialLogin}>
           <p>다른 방법으로 로그인하기</p>
           <div className={styles.icons}>
-            <a href='http://localhost:8000/oauth2/authorization/kakao'>
+            <a href='http://13.125.35.67:8000/oauth2/authorization/kakao'>
               <img src='/images/kakao.png' alt='KAKAO' />
             </a>
-            <Link href='http://localhost:8000/oauth2/authorization/google'>
+            <Link href='http://13.125.35.67:8000/oauth2/authorization/google'>
               <img src='/images/google.png' alt='Google' />
             </Link>
-            <Link href='http://localhost:8000/oauth2/authorization/naver'>
+            <Link href='http://13.125.35.67:8000/oauth2/authorization/naver'>
               <img src='/images/naver.png' alt='Naver' />
             </Link>
           </div>

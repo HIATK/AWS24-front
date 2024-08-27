@@ -8,7 +8,7 @@ module.exports = {
                   ///api/:path* <-들어갈수있음
               source: '/api/:path*',
               //서버 포트8000에  api/:path api로 시작하는 모든 경로 연결 
-              destination: 'http://localhost:8000/api/:path*',
+              destination: 'http://13.125.35.67:8000/api/:path*',
           },
       ];
   },
