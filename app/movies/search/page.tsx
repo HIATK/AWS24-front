@@ -4,14 +4,17 @@
 import Search from "@/(components)/Search/Search";
 import {useTheme} from "@/(components)/DarkModToggle/ThemeContext";
 import MatrixRainEffect from "@/(components)/RainEffect/MatrixRainEffect";
+import {Suspense} from "react";
 
 const SearchPage = () => {
   const {theme} = useTheme();
   return (
-    <div>
+      <Suspense fallback={<div>Loading...</div>}>
+
       {theme === 'dark' && <MatrixRainEffect/>}
       <Search />
-    </div>
+      </Suspense>
+
   );
 };
 

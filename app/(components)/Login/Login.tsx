@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useAuth } from '../../(context)/AuthContext';
 import { login } from '@/_Service/MemberService';
 import axios from 'axios';
+import Image from "next/image";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -61,13 +62,13 @@ const Login: React.FC = () => {
           <p>다른 방법으로 로그인하기</p>
           <div className={styles.icons}>
             <a href='http://13.125.35.67:8000/oauth2/authorization/kakao'>
-              <img src='/images/kakao.png' alt='KAKAO' />
+              <Image src='/images/kakao.png' alt='KAKAO' />
             </a>
             <Link href='http://13.125.35.67:8000/oauth2/authorization/google'>
-              <img src='/images/google.png' alt='Google' />
+              <Image src='/images/google.png' alt='Google' />
             </Link>
             <Link href='http://13.125.35.67:8000/oauth2/authorization/naver'>
-              <img src='/images/naver.png' alt='Naver' />
+              <Image src='/images/naver.png' alt='Naver' />
             </Link>
           </div>
         </div>

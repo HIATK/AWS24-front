@@ -75,7 +75,6 @@ export const logout = async () => {
           baseURL: 'http://13.125.35.67:8000',
           headers: { 'Content-Type': 'application/json' },
           withCredentials: true,
-          credentials: 'include',
         });
         console.log(response);
         return response.data;
@@ -95,7 +94,6 @@ export const verifyPassword = async (password: string): Promise<boolean> => {
           baseURL: "http://13.125.35.67:8000",
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
-          credentials: "include",
         }
     );
     return response.data.isValid;
@@ -114,7 +112,6 @@ export const checkNicknameDuplicate = async (nickname: string): Promise<boolean>
       baseURL: "http://13.125.35.67:8000",
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
-      credentials: "include",
     });
     return response.data.isDuplicate;
   } catch (error) {

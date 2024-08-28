@@ -6,6 +6,7 @@ import styles from "./PostList.module.css";
 import { PostDetails } from "@/(types)/types";
 import { useAuth } from "@/(context)/AuthContext";
 import { deletePost } from "@/_Service/PostService";
+import Image from "next/image";
 
 interface PostListProps {
   posts: PostDetails[];
@@ -114,11 +115,8 @@ const PostList: React.FC<PostListProps> = ({
             </div>
             {/* 추가한 부분 start */}
             <div className={styles.profileImage}>
-              {console.log(
-                "Image path:",
-                `/profile/${removeBasePath(post.filePath)}`
-              )}
-              <img
+
+              <Image
                 src={`/profile/${removeBasePath(post.filePath)}`}
                 alt="Profile Image"
                 className={styles.profileImage}
