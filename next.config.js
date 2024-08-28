@@ -1,5 +1,6 @@
 // next.config.js
 module.exports = {
+    output: 'standalone',
     eslint:{
         //eslint 무시하고 강제로 빌드하는 코드
         ignoreDuringBuilds: true,
