@@ -15,10 +15,10 @@ interface PostListProps {
 }
 
 const PostList: React.FC<PostListProps> = ({
-  posts,
-  setPosts,
-  onDeletePost,
-}) => {
+                                             posts,
+                                             setPosts,
+                                             onDeletePost,
+                                           }) => {
   const { memberNo } = useAuth();
   const [expandedPost, setExpandedPost] = useState<number | null>(null);
   const [displayedPosts, setDisplayedPosts] = useState<PostDetails[]>([]);
@@ -35,12 +35,12 @@ const PostList: React.FC<PostListProps> = ({
     if (observer.current) observer.current.disconnect();
 
     observer.current = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          loadMorePosts();
-        }
-      },
-      { threshold: 1.0 }
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            loadMorePosts();
+          }
+        },
+        { threshold: 1.0 }
     );
 
     if (observerRef.current) {
@@ -61,11 +61,13 @@ const PostList: React.FC<PostListProps> = ({
   const renderStars = (ratingStar: number) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
-      if (i <= ratingStar) {
-        stars.push(<FaStar key={i} className={styles.star} />);
-      } else {
-        stars.push(<FaRegStar key={i} className={styles.star} />);
-      }
+      stars.push(
+          i <= ratingStar ? (
+              <FaStar key={i} className={styles.star} />
+          ) : (
+              <FaRegStar key={i} className={styles.star} />
+          )
+      );
     }
     return stars;
   };
@@ -75,13 +77,10 @@ const PostList: React.FC<PostListProps> = ({
   };
 
   // 수정된 부분 start
+  // `removeBasePath` 함수 수정
   const removeBasePath = (filePath: string) => {
-    const basePathToRemove =
-      "C:\\teamproject\\MovieProjectLast\\frontend\\public\\profile\\";
-    console.log("Original path:", filePath);
-    const newPath = filePath.replace(basePathToRemove, "");
-    console.log("New path:", newPath);
-    return newPath;
+    // 로컬 파일 경로를 사용하지 않고 상대 경로를 리턴
+    return filePath.replace(/^.*\/public\/profile\//, "");
   };
   // 수정된 부분 end
 
@@ -97,57 +96,59 @@ const PostList: React.FC<PostListProps> = ({
   };
 
   return (
-    <div className={styles.postsList}>
-      <AnimatePresence>
-        {displayedPosts.map((post) => (
-          <motion.div
-            key={post.postId}
-            className={`${styles.post} ${
-              expandedPost === post.postId ? styles.expanded : ""
-            }`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
-          >
-            <div className={styles.postHeader}>
-              {renderStars(post.ratingStar)}
-            </div>
-            {/* 추가한 부분 start */}
-            <div className={styles.profileImage}>
-
-              <Image
-                src={`/profile/${removeBasePath(post.filePath)}`}
-                alt="Profile Image"
-                className={styles.profileImage}
-              />
-            </div>
-            {/* 추가한 부분 end */}
-            <div className={styles.postNick}>{post.memberNick}</div>
-            <div
-              className={`${styles.postContent} ${styles.cursorPointer}`}
-              onClick={() => toggleExpand(post.postId)}
-            >
-              {expandedPost === post.postId
-                ? post.postContent
-                : post.postContent
-                ? post.postContent.split("\n")[0]
-                : ""}
-            </div>
-            <div className={styles.postFooter}>
-              <div>{post.regDate}</div>
-              {memberNo === post.memberNo && (
-                <MdDelete
-                  onClick={() => handleDeletePost(post.postId)}
-                  className={`${styles.deleteButton} ${styles.cursorPointer}`}
-                />
-              )}
-            </div>
-          </motion.div>
-        ))}
-      </AnimatePresence>
-      <div ref={observerRef} className={styles.observer} />
-    </div>
+      <div className={styles.postsList}>
+        <AnimatePresence>
+          {displayedPosts.map((post) => (
+              <motion.div
+                  key={post.postId}
+                  className={`${styles.post} ${
+                      expandedPost === post.postId ? styles.expanded : ""
+                  }`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 1 }}
+              >
+                <div className={styles.postHeader}>
+                  {renderStars(post.ratingStar)}
+                </div>
+                {/* 추가한 부분 start */}
+                <div className={styles.profileImage}>
+                  <Image
+                      src={`/profile/${removeBasePath(post.filePath)}`}
+                      alt={`Profile image for post ${post.postId}`}
+                      className={styles.profileImage}
+                      layout="responsive" // 이 속성은 필요에 따라 조절
+                      width={100} // 적절한 너비
+                      height={100} // 적절한 높이
+                  />
+                </div>
+                {/* 추가한 부분 end */}
+                <div className={styles.postNick}>{post.memberNick}</div>
+                <div
+                    className={`${styles.postContent} ${styles.cursorPointer}`}
+                    onClick={() => toggleExpand(post.postId)}
+                >
+                  {expandedPost === post.postId
+                      ? post.postContent
+                      : post.postContent
+                          ? post.postContent.split("\n")[0]
+                          : ""}
+                </div>
+                <div className={styles.postFooter}>
+                  <div>{post.regDate}</div>
+                  {memberNo === post.memberNo && (
+                      <MdDelete
+                          onClick={() => handleDeletePost(post.postId)}
+                          className={`${styles.deleteButton} ${styles.cursorPointer}`}
+                      />
+                  )}
+                </div>
+              </motion.div>
+          ))}
+        </AnimatePresence>
+        <div ref={observerRef} className={styles.observer} />
+      </div>
   );
 };
 
