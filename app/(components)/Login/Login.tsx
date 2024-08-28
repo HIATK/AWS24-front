@@ -7,6 +7,9 @@ import { useAuth } from '../../(context)/AuthContext';
 import { login } from '@/_Service/MemberService';
 import axios from 'axios';
 import Image from "next/image";
+import kakao from "@/../public/images/kakao.png"
+import google from "@/../public/images/google.png"
+import naver from "@/../public/images/naver.png"
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -61,14 +64,14 @@ const Login: React.FC = () => {
         <div className={styles.socialLogin}>
           <p>다른 방법으로 로그인하기</p>
           <div className={styles.icons}>
-            <a href='http://13.125.35.67:8000/oauth2/authorization/kakao'>
-              <Image src='/images/kakao.png' alt='KAKAO' />
+            <a href='http://ec2-3-35-122-73.ap-northeast-2.compute.amazonaws.com:8000/oauth2/authorization/kakao'>
+              <Image src={kakao} alt='KAKAO' />
             </a>
-            <Link href='http://13.125.35.67:8000/oauth2/authorization/google'>
-              <Image src='/images/google.png' alt='Google' />
+            <Link href='http://ec2-3-35-122-73.ap-northeast-2.compute.amazonaws.com:8000/oauth2/authorization/google'>
+              <Image src={google} alt='Google' />
             </Link>
-            <Link href='http://13.125.35.67:8000/oauth2/authorization/naver'>
-              <Image src='/images/naver.png' alt='Naver' />
+            <Link href='http://ec2-3-35-122-73.ap-northeast-2.compute.amazonaws.com:8000/oauth2/authorization/naver'>
+              <Image src={naver} alt='Naver' />
             </Link>
           </div>
         </div>

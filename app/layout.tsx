@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { AuthProvider } from "./(context)/AuthContext";
 import React from "react";
 import {ThemeProvider} from "@/(components)/DarkModToggle/ThemeContext";
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <head>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8395468797693752"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+        </head>
+
       <body>
       <ThemeProvider>
           <AuthProvider>

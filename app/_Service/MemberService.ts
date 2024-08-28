@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {Member} from "@/(types)/types";
 
-const API_URL = 'http://13.125.35.67:8000/api/member';
+const API_URL = 'http://ec2-3-35-122-73.ap-northeast-2.compute.amazonaws.com:8000/api/member';
 
 // Axios 인스턴스 생성
 const axiosInstance = axios.create({
@@ -27,7 +27,7 @@ axiosInstance.interceptors.response.use(
 
 export const login = async (username: string, password: string) => {
     try {
-      const response = await axios.post('http://13.125.35.67:8000/api/login', 
+      const response = await axios.post('http://ec2-3-35-122-73.ap-northeast-2.compute.amazonaws.com:8000/api/login', 
         { username, password },
         { withCredentials: true }
       );
@@ -72,7 +72,7 @@ export const logout = async () => {
     export const getMemberDetails = async (): Promise<Member> => {
       try {
         const response = await axios.get('/api/member/profile', {
-          baseURL: 'http://13.125.35.67:8000',
+          baseURL: 'http://ec2-3-35-122-73.ap-northeast-2.compute.amazonaws.com:8000',
           headers: { 'Content-Type': 'application/json' },
           withCredentials: true,
         });
@@ -91,7 +91,7 @@ export const verifyPassword = async (password: string): Promise<boolean> => {
         "api/member/verifyPw",
         { password },
         {
-          baseURL: "http://13.125.35.67:8000",
+          baseURL: "http://ec2-3-35-122-73.ap-northeast-2.compute.amazonaws.com:8000",
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
@@ -109,7 +109,7 @@ export const checkNicknameDuplicate = async (nickname: string): Promise<boolean>
   try {
     const response = await axios.get(`/api/member/checkNickname`, {
       params: { nickname },
-      baseURL: "http://13.125.35.67:8000",
+      baseURL: "http://ec2-3-35-122-73.ap-northeast-2.compute.amazonaws.com:8000",
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     });

@@ -14,7 +14,7 @@ module.exports = {
                   ///api/:path* <-들어갈수있음
               source: '/api/:path*',
               //서버 포트8000에  api/:path api로 시작하는 모든 경로 연결 
-              destination: 'http://13.125.35.67:8000/api/:path*',
+              destination: 'http://ec2-3-35-122-73.ap-northeast-2.compute.amazonaws.com:8000/api/:path*',
           },
       ];
   },
