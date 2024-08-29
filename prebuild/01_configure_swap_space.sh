@@ -12,4 +12,4 @@ fi
 /bin/dd if=/dev/zero of=$SWAPFILE bs=1M count=2048  # 2GB 크기의 스왑 파일 생성
 /bin/chmod 600 $SWAPFILE  # 스왑 파일의 권한을 600으로 설정 (보안상의 이유)
 /sbin/mkswap $SWAPFILE  # 생성된 파일을 스왑 영역으로 포맷
-/sbin/swapon $SWAPFILE  # 새로 생성한 스왑 파일 활성화
+/sbin/swapon $SWAPFILE  # 새로 생성한 스왑 파일 활성화123
