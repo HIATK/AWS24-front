@@ -13,4 +13,3 @@ fi
 /sbin/mkswap $SWAPFILE
 /sbin/swapon $SWAPFILE
 /sbin/sysctl vm.swappiness=60
-/bin/npm install -g serve
