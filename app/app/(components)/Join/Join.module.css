@@ -1,0 +1,55 @@
+/* components/Join.module.css */
+.fullHeightContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* 화면 전체 높이 사용 */
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 30px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1); /* 약간 투명한 배경 추가 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* 박스 그림자 추가 */
+}
+
+.formContainer label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.formContainer input {
+  width: 300px; /* 입력 필드 너비 설정 */
+  padding: 10px;
+  border: 1px solid #5fbebb; /* 빨간 테두리와 약간의 투명도 */
+  background: rgba(0, 0, 0, 0.5); /* 약간 투명하게 설정 */
+  color: white;
+  border-radius: 4px;
+}
+
+.formContainer input::placeholder {
+  color: rgba(255, 255, 255, 0.7); /* 투명도를 가진 placeholder 색상 */
+}
+
+.formContainer button {
+  width: 300px; /* 버튼 너비를 입력 필드와 동일하게 설정 */
+  padding: 10px;
+  background-color: #909090;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+.formContainer button:hover {
+  background-color: #777;
+}
+
+.error {
+  color: #5fbebb;
+  font-size: 0.875rem;
+}

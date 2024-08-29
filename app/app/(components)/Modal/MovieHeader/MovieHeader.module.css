@@ -1,0 +1,161 @@
+/* MovieHeader.module.css */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+}
+
+.topSection {
+  display: flex;
+  justify-content: flex-start; /* 왼쪽 정렬 */
+  width: 100%;
+}
+
+.posterWrapper {
+  position: relative;
+  width: 200px; /* 포스터의 너비 설정 */
+  height: 287.5px; /* 포스터의 높이 설정 */
+  flex-shrink: 0; /* 너비 고정 */
+}
+
+.poster {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ratingLikeSection {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 3px 5px;
+  gap: 1rem;
+  align-items: center;
+}
+
+.averageRating {
+  font-size: 1rem;
+  color: #ffd700;
+  display: flex;
+  align-items: center;
+}
+
+.likeButton {
+  background-color: transparent;
+  border: none;
+  color: red;
+  padding: 0;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.likeButton:disabled {
+  color: red;
+  cursor: not-allowed;
+}
+
+.likesCount {
+  font-size: 1rem;
+  margin-left: 0.5rem;
+}
+
+.liked .fa-heart {
+  color: red;
+}
+
+/* Youtube 플레이어 설정 */
+.video {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 511.11px; /* 비디오의 고정 너비 */
+  height: 287.5px;
+  margin-left: 20px; /* 포스터와 유튜브 플레이어 사이의 간격 설정 */
+  flex-shrink: 0; /* 너비 고정 */
+}
+
+.iframeContainer {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* 필요한 경우 오버플로우 숨기기 */
+}
+
+.iframe {
+  width: 100%;
+  height: 100%;
+  border: 0; /* 테두리 제거 */
+}
+
+.movieInfo {
+  flex: 1;
+  padding: 1rem;
+}
+
+.error {
+  color: red;
+}
+
+/* 이미지 슬라이드 설정 */
+.imageSlider {
+  position: relative;
+  width: 560px; /* 슬라이더의 고정 너비 */
+  height: 287.5px;
+  overflow: hidden;
+  margin-left: 20px; /* 포스터와 슬라이더 사이의 간격 조정 */
+  flex-shrink: 0; /* 너비 고정 */
+}
+
+.imageSlider img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+.imageSlider img.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.imageSlider img.prev {
+  transform: translateX(-100%);
+}
+
+.imageSlider img.next {
+  transform: translateX(100%);
+}
+
+.singleImageWrapper {
+  margin-left: 20px;
+}
+
+/* 로딩 애니메이션 */
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  margin: auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

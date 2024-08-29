@@ -1,0 +1,77 @@
+/* 폼 스타일 */
+.form {
+    background-color: var(--background); /* 변수로 정의된 배경 색상 */
+    color: var(--text); /* 변수로 정의된 텍스트 색상 */
+    display: flex;
+    flex-direction: column; /* 세로 방향 정렬 */
+    gap: 1rem; /* 요소 간 간격 */
+    width: 100%;
+    border-radius: 8px; /* 모서리 둥글게 */
+    font-size: 1rem; /* 폰트 크기 */
+  }
+  
+  /* 레이블 스타일 */
+  .label {
+    display: flex;
+    flex-direction: column; /* 세로 방향 정렬 */
+    font-size: 1rem; /* 폰트 크기 */
+    color: var(--text); /* 변수로 정의된 텍스트 색상 */
+  }
+  
+  /* 텍스트 영역 스타일 */
+  .textarea {
+    background-color: var(--input-background); /* 변수로 정의된 입력 배경 색상 */
+    color: var(--text); /* 변수로 정의된 텍스트 색상 */
+    width: 100%;
+    height: 2rem; /* 기본 높이 */
+    padding: 0.5rem; /* 내부 여백 */
+    margin-top: 0.5rem; /* 상단 여백 */
+    border: none; /* 테두리 없음 */
+    border-radius: 4px; /* 모서리 둥글게 */
+    resize: none; /* 크기 조정 불가 */
+    transition: height 0.3s ease, padding 0.3s ease; /* 높이 및 여백 변경 애니메이션 */
+  }
+  
+  /* 텍스트 영역 확장 스타일 */
+  .textarea.expandedTextarea {
+    height: 5rem; /* 확장된 높이 */
+    padding: 1rem; /* 확장된 여백 */
+  }
+  
+  /* 텍스트 영역 포커스 스타일 */
+  .textarea:focus {
+    height: 5rem; /* 포커스 시 높이 */
+    padding: 1rem; /* 포커스 시 여백 */
+  }
+  
+  /* 평점 및 버튼 컨테이너 */
+  .ratingAndButton {
+    display: flex;
+    justify-content: space-between; /* 요소 간 공간 분배 */
+    align-items: center; /* 세로 정렬 */
+    margin-top: auto; /* 상단 여백 */
+  }
+  
+  /* 버튼 컨테이너 */
+  .buttonContainer {
+    margin-left: auto; /* 왼쪽 여백 자동 */
+  }
+  
+  /* 버튼 스타일 */
+  .button {
+    background-color: var(--input-background); /* 변수로 정의된 입력 배경 색상 */
+    color: var(--text); /* 변수로 정의된 텍스트 색상 */
+    padding: 0.5rem 1rem; /* 내부 여백 */
+    border: none; /* 테두리 없음 */
+    border-radius: 4px; /* 모서리 둥글게 */
+    cursor: pointer; /* 마우스 포인터 변경 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+  }
+  
+  /* 평점 오류 메시지 */
+  .ratingError {
+    color: var(--error-color); /* 변수로 정의된 오류 색상 */
+    font-size: 0.875rem; /* 폰트 크기 */
+    margin-top: 0.5rem; /* 상단 여백 */
+  }
+  
