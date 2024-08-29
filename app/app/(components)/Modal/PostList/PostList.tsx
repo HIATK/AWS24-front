@@ -114,10 +114,6 @@ const PostList: React.FC<PostListProps> = ({
             </div>
             {/* 추가한 부분 start */}
             <div className={styles.profileImage}>
-              {console.log(
-                "Image path:",
-                `/profile/${removeBasePath(post.filePath)}`
-              )}
               <img
                 src={`/profile/${removeBasePath(post.filePath)}`}
                 alt="Profile Image"

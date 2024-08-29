@@ -9,10 +9,12 @@ import {Suspense} from "react";
 const SearchPage = () => {
   const {theme} = useTheme();
   return (
+
       <Suspense fallback={<div>Loading...</div>}>
 
       {theme === 'dark' && <MatrixRainEffect/>}
-      <Search />
+          <Search />
+
       </Suspense>
 
   );

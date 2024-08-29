@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState, useRef, useCallback, Suspense } from 'react';
 import { useSearchParams, usePathname } from 'next/navigation';
 import { MovieDetails } from '@/(types)/types';
 import styles from './Search.module.css';
@@ -92,45 +92,51 @@ const Search = () => {
   }, [pathname, searchTerm]);
 
   return (
-    <div className={styles.main}>
-      <div className={styles.description}>
-        <div className={styles.searchText}>Search results for "{initialSearchTerm}" </div>
-      </div>
-      <div className={styles.posterSection}>
-        <div className={styles["movie-items"]}>
-          {results.map((movie, index) => {
-            if (results.length === index + 1) {
-              return (
-                <div key={movie.id} className={styles["movie-item"]} ref={lastPosterElementRef}>
-                  <Link href={`/movies/details/${movie.id}`}>
-                    <img
-                      src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
-                      alt={`Poster for ${movie.title}`}
-                      className={styles["movie-img"]}
-                    />
-                  </Link>
-                </div>
-              );
-            } else {
-              return (
-                <div key={movie.id} className={styles["movie-item"]}>
-                  <Link href={`/movies/details/${movie.id}`}>
-                    <img
-                      src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
-                      alt={`Poster for ${movie.title}`}
-                      className={styles["movie-img"]}
-                    />
-                  </Link>
-                </div>
-              );
-            }
-          })}
+      <div className={styles.main}>
+        <div className={styles.description}>
+          <div className={styles.searchText}>Search results for "{initialSearchTerm}" </div>
         </div>
-        <div className={styles.searchText}>{loading && <p>Loading...</p>}</div>
-        <div className={styles.searchText}>{!hasMore && <p>No more results</p>}</div>
+        <div className={styles.posterSection}>
+          <div className={styles["movie-items"]}>
+            {results.map((movie, index) => {
+              if (results.length === index + 1) {
+                return (
+                    <div key={movie.id} className={styles["movie-item"]} ref={lastPosterElementRef}>
+                      <Link href={`/movies/details/${movie.id}`}>
+                        <img
+                            src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
+                            alt={`Poster for ${movie.title}`}
+                            className={styles["movie-img"]}
+                        />
+                      </Link>
+                    </div>
+                );
+              } else {
+                return (
+                    <div key={movie.id} className={styles["movie-item"]}>
+                      <Link href={`/movies/details/${movie.id}`}>
+                        <img
+                            src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
+                            alt={`Poster for ${movie.title}`}
+                            className={styles["movie-img"]}
+                        />
+                      </Link>
+                    </div>
+                );
+              }
+            })}
+          </div>
+          <div className={styles.searchText}>{loading && <p>Loading...</p>}</div>
+          <div className={styles.searchText}>{!hasMore && <p>No more results</p>}</div>
+        </div>
       </div>
-    </div>
   );
 };
 
-export default Search;
+export default function SearchWithSuspense() {
+  return (
+      <Suspense fallback={<div>Loading search results...</div>}>
+        <Search />
+      </Suspense>
+  );
+}
