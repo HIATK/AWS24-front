@@ -1,1 +1,1 @@
-web: serve -s build -l 8080
+web: serve -s build -l $PORT
