@@ -22,7 +22,6 @@ COPY . .
 
 # 환경 변수 설정 (빌드 시 환경에 맞게 설정 가능)
 ARG ENV_MODE=production
-COPY .env.${ENV_MODE} .env
 
 # Next.js 애플리케이션 빌드
 RUN yarn build

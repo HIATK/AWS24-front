@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://ec2-3-35-122-73.ap-northeast-2.compute.amazonaws.com:8000/api/movies";
+const API_BASE_URL = "http://ec2-3-35-122-73.ap-northeast-2.compute.amazonaws.com:5000/api/movies";
 
 export const getNowPlaying = async () => {
   try {
