@@ -119,3 +119,20 @@ export const checkNicknameDuplicate = async (nickname: string): Promise<boolean>
     return false;
   }
 };
+
+// otherProfile 유저 정보 가져오기
+export const getOtherMemberDetails = async (nickname: string | null | undefined): Promise<Member> => {
+  try {
+    const response = await axios.get('/api/member/otherProfile', {
+      params: { nickname },
+      baseURL: "ec2-3-36-116-6.ap-northeast-2.compute.amazonaws.com",
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    });
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    console.error('남의 프로필 정보 가져오기 실패:', error);
+    throw error;
+  }
+};
