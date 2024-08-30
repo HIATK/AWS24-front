@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {Member} from "@/(types)/types";
 
-const API_URL = 'ec2-3-36-116-6.ap-northeast-2.compute.amazonaws.com:5000/api/member';
+const API_URL = 'ec2-3-36-116-6.ap-northeast-2.compute.amazonaws.com/api/member';
 
 // Axios 인스턴스 생성
 const axiosInstance = axios.create({
@@ -27,7 +27,7 @@ axiosInstance.interceptors.response.use(
 
 export const login = async (username: string, password: string) => {
     try {
-      const response = await axios.post('ec2-3-36-116-6.ap-northeast-2.compute.amazonaws.com:5000/api/login', 
+      const response = await axios.post('ec2-3-36-116-6.ap-northeast-2.compute.amazonaws.com/api/login', 
         { username, password },
         { withCredentials: true }
       );
@@ -72,7 +72,7 @@ export const logout = async () => {
     export const getMemberDetails = async (): Promise<Member> => {
       try {
         const response = await axios.get('/api/member/profile', {
-          baseURL: 'ec2-3-36-116-6.ap-northeast-2.compute.amazonaws.com:5000',
+          baseURL: 'ec2-3-36-116-6.ap-northeast-2.compute.amazonaws.com',
           headers: { 'Content-Type': 'application/json' },
           withCredentials: true,
         });
@@ -91,7 +91,7 @@ export const verifyPassword = async (password: string): Promise<boolean> => {
         "api/member/verifyPw",
         { password },
         {
-          baseURL: "ec2-3-36-116-6.ap-northeast-2.compute.amazonaws.com:5000",
+          baseURL: "ec2-3-36-116-6.ap-northeast-2.compute.amazonaws.com",
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
@@ -109,7 +109,7 @@ export const checkNicknameDuplicate = async (nickname: string): Promise<boolean>
   try {
     const response = await axios.get(`/api/member/checkNickname`, {
       params: { nickname },
-      baseURL: "ec2-3-36-116-6.ap-northeast-2.compute.amazonaws.com:5000",
+      baseURL: "ec2-3-36-116-6.ap-northeast-2.compute.amazonaws.com",
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     });

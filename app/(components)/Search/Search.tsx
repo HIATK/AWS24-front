@@ -23,7 +23,7 @@ const Search = () => {
   const fetchResults = async (searchTerm: string, page: number) => {
     setLoading(true);
     try {
-      const response = await fetch(`ec2-3-36-116-6.ap-northeast-2.compute.amazonaws.com:5000/api/movies/search?keyword=${encodeURIComponent(searchTerm)}&page=${page}`);
+      const response = await fetch(`ec2-3-36-116-6.ap-northeast-2.compute.amazonaws.com/api/movies/search?keyword=${encodeURIComponent(searchTerm)}&page=${page}`);
       if (response.ok) {
         const data = await response.json();
         if (Array.isArray(data)) {
