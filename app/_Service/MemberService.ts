@@ -125,7 +125,7 @@ export const getOtherMemberDetails = async (nickname: string | null | undefined)
   try {
     const response = await axios.get('/api/member/otherProfile', {
       params: { nickname },
-      baseURL: "https://moviepunk.p-e.kr/",
+      baseURL: "https://dev.moviepunk.p-e.kr",
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     });
