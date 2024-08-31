@@ -23,7 +23,7 @@ const Search = () => {
   const fetchResults = async (searchTerm: string, page: number) => {
     setLoading(true);
     try {
-      const response = await fetch(`ec2-3-36-116-6.ap-northeast-2.compute.amazonaws.com/api/movies/search?keyword=${encodeURIComponent(searchTerm)}&page=${page}`);
+      const response = await fetch(`https://dev.moviepunk.p-e.kr/api/movies/search?keyword=${encodeURIComponent(searchTerm)}&page=${page}`);
       if (response.ok) {
         const data = await response.json();
         if (Array.isArray(data)) {
@@ -52,7 +52,7 @@ const Search = () => {
 
   useEffect(() => {
     const currentURL = window.location.href;
-    const expectedURL = `ec2-3-36-116-6.ap-northeast-2.compute.amazonaws.com:3000/movies/search?keyword=${encodeURIComponent(searchTerm)}`;
+    const expectedURL = `https://dev.moviepunk.p-e.kr:3000/movies/search?keyword=${encodeURIComponent(searchTerm)}`;
 
     if (currentURL === expectedURL && (prevSearchTermRef.current !== searchTerm || !initialFetchRef.current)) {
       resetSearch();

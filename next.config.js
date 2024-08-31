@@ -12,7 +12,7 @@ module.exports = {
                 // Matches any API path starting with /api/
                 source: '/api/:path*',
                 // Redirects to the specified external server
-                destination: 'http://ec2-3-36-116-6.ap-northeast-2.compute.amazonaws.com:5000/api/:path*',
+                destination: 'http://https://dev.moviepunk.p-e.kr:5000/api/:path*',
             },
         ];
     },
