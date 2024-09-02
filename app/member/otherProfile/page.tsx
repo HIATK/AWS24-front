@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../(context)/AuthContext';
 import Loading from './loading';
-import {useTheme} from "@/(components)/DarkModToggle/ThemeContext";
+import { useTheme } from "@/(components)/DarkModToggle/ThemeContext";
 import MatrixRainEffect from "@/(components)/RainEffect/MatrixRainEffect";
 import RainEffect from "@/(components)/RainEffect/RainEffect";
 import OtherProfile from "@/(components)/OtherProfile/OtherProfile";
@@ -14,9 +14,9 @@ const ProfilePage: React.FC = () => {
     const { isLoggedIn, checkAuth } = useAuth();
     const router = useRouter();
     const searchParams = useSearchParams();
-    const otherNick = searchParams.get('otherNick');
+    const otherNick = searchParams.get('otherNick'); // URL에서 `otherNick` 파라미터를 가져옴
     const [loading, setLoading] = useState(true);
-    const {theme} = useTheme();
+    const { theme } = useTheme();
 
     useEffect(() => {
         const verifyLoginStatus = async () => {
@@ -43,10 +43,8 @@ const ProfilePage: React.FC = () => {
 
     return (
         <div>
-            {theme === 'dark' ? <MatrixRainEffect/> : <RainEffect/>}
-            <OtherProfile
-                otherNick={otherNick}
-            />
+            {theme === 'dark' ? <MatrixRainEffect /> : <RainEffect />}
+            <OtherProfile otherNick={otherNick} />
         </div>
     );
 };

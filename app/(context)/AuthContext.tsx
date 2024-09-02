@@ -91,9 +91,9 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
   }, [checkedAuth, refreshAccessToken, checkAuth]);
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, memberNick, memberNo, checkAuth, setIsLoggedIn, setMemberNick, logout }}>
-      {children}
-    </AuthContext.Provider>
+      <AuthContext.Provider value={{ isLoggedIn, memberNick, memberNo, checkAuth, setIsLoggedIn, setMemberNick, logout }}>
+        {children}
+      </AuthContext.Provider>
   );
 };
 

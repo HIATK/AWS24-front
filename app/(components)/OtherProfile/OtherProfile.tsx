@@ -11,10 +11,10 @@ import OtherPostList from "@/(components)/OtherProfile/OtherPostList/OtherPostLi
 import Modal from "@/(components)/OtherProfile/ImageModal/ImageModal";
 
 interface OtherProfileProps {
-    otherNick?: string | null
+    otherNick?: string | null;
 }
 
-const OtherProfile: React.FC = ({otherNick}: OtherProfileProps) => {
+const OtherProfile: React.FC<OtherProfileProps> = ({otherNick}) => {
     const {isLoggedIn} = useAuth();
     const [posts, setPosts] = useState<PostDetails[]>([]);
     const [movies, setMovies] = useState<MovieDetails[]>([]);
@@ -33,7 +33,6 @@ const OtherProfile: React.FC = ({otherNick}: OtherProfileProps) => {
             }
         } catch (error: any) {
             if (error.response?.status === 404) {
-                // 파일이 없어서 발생한 에러인 경우 무시
                 console.log("프로필 사진이 존재하지 않습니다.");
             } else {
                 console.error("이미지 조회 실패", error);
@@ -44,7 +43,6 @@ const OtherProfile: React.FC = ({otherNick}: OtherProfileProps) => {
 
     useEffect(() => {
         let isCancelled = false;
-        // OtherProfile 데이터 서버에서 가져오기
         const fetchMemberDetails = async () => {
             if (!isLoggedIn) {
                 return;
@@ -121,6 +119,5 @@ const OtherProfile: React.FC = ({otherNick}: OtherProfileProps) => {
         </div>
     );
 };
-
 
 export default OtherProfile;

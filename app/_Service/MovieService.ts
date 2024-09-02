@@ -1,5 +1,6 @@
 import {axiosInstance} from "@/(axiosInstance)/api";
 
+
 export const getNowPlaying = async () => {
   try {
     const response = await axiosInstance.get(`movies/now_playing`);

@@ -132,6 +132,7 @@ export const getOtherMemberDetails = async (nickname: string | null | undefined)
   try {
     const response = await axiosInstance.get(`member/otherProfile`, {
       params: { nickname },
+
     });
     console.log(response);
     return response.data;

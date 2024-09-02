@@ -1,20 +1,19 @@
-// next.config.js
 module.exports = {
     output: 'standalone',
-    eslint:{
-        //eslint 무시하고 강제로 빌드하는 코드
+    eslint: {
+        // Ignore ESLint errors during builds
         ignoreDuringBuilds: true,
     },
     reactStrictMode: false,
-    swcMinify:true,
+    swcMinify: true,
     async rewrites() {
-      return [
-          {
-                  ///api/:path* <-들어갈수있음
-              source: '/api/:path*',
-              //서버 포트8000에  api/:path api로 시작하는 모든 경로 연결 
-              destination: 'http://ec2-3-36-116-6.ap-northeast-2.compute.amazonaws.com:5000/api/:path*', //
-          },
-      ];
-  },
+        return [
+            {
+                // Matches any API path starting with /api/
+                source: '/api/:path*',
+                // Redirects to the specified external server
+                destination: 'https://dev.moviepunk.p-e.kr/api/:path*',
+            },
+        ];
+    },
 };
