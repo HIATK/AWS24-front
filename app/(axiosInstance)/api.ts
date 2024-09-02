@@ -1,7 +1,7 @@
 import axios from "axios";
 import {logout} from "@/_Service/MemberService";
 
-const API_URL = 'https://dev.moviepunk.p-e.kr/api/';
+const API_URL = 'ec2-3-36-116-6.ap-northeast-2.compute.amazonaws.com/api/';
 
 // Axios 인스턴스 생성
 export const axiosInstance = axios.create({
