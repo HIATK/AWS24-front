@@ -1,35 +1,11 @@
 import axios from 'axios';
 import {Member} from "@/(types)/types";
-
-const API_URL = 'https://dev.moviepunk.p-e.kr/api/member';
-
-// Axios 인스턴스 생성
-const axiosInstance = axios.create({
-  withCredentials: true,
-});
-
-// 응답 인터셉터 설정
-axiosInstance.interceptors.response.use(
-  response => response,
-  async error => {
-    if (error.response && error.response.status === 401 && error.response.data.msg.includes('블랙리스트')) {
-      console.error('Access token is blacklisted. Logging out...');
-      try {
-        await logout();
-      } catch (logoutError) {
-        console.error('Error logging out:', logoutError);
-      }
-    }
-    return Promise.reject(error);
-  }
-);
-
+import {axiosInstance} from "@/(axiosInstance)/api";
 
 export const login = async (username: string, password: string) => {
     try {
-      const response = await axios.post('https://dev.moviepunk.p-e.kr/api/login', 
+      const response = await axiosInstance.post('/login',
         { username, password },
-        { withCredentials: true }
       );
       return response.data;
     } catch (error) {
@@ -43,7 +19,7 @@ export const login = async (username: string, password: string) => {
 
 export const checkAuth = async () => {
   try {
-    const response = await axios.get(`${API_URL}/check_auth`, { withCredentials: true });
+    const response = await axiosInstance.get(`member/check_auth`);
     return response.data;
   } catch (error) {
     throw error;
@@ -52,7 +28,7 @@ export const checkAuth = async () => {
 
 export const refreshAccessToken = async () => {
   try {
-    const response = await axios.post(`${API_URL}/check_auth/refresh`, {}, { withCredentials: true });
+    const response = await axiosInstance.post(`member/check_auth/refresh`, {});
     return response.data;
   } catch (error) {
     throw new Error('Failed to refresh token');
@@ -61,7 +37,7 @@ export const refreshAccessToken = async () => {
 
 export const logout = async () => {
   try {
-    await axios.post(`${API_URL}/logout`, {}, { withCredentials: true });
+    await axiosInstance.post(`member/logout`, {}, );
   } catch (error) {
     console.error('Error logging out:', error);
     throw error;
@@ -71,10 +47,7 @@ export const logout = async () => {
 // profile 유저 정보 가져오기
     export const getMemberDetails = async (): Promise<Member> => {
       try {
-        const response = await axios.get('/api/member/profile', {
-          baseURL: 'https://dev.moviepunk.p-e.kr',
-          headers: { 'Content-Type': 'application/json' },
-          withCredentials: true,
+        const response = await axiosInstance.get(`member/profile`, {
         });
         console.log(response);
         return response.data;
@@ -87,14 +60,9 @@ export const logout = async () => {
 // profile 정보수정 할 때 입력된 '현재 비밀번호' 서버에 보내서 실제 로그인한 사람의 비밀번호가 맞는지 검증하기.
 export const verifyPassword = async (password: string): Promise<boolean> => {
   try {
-    const response = await axios.post(
-        "api/member/verifyPw",
+    const response = await axiosInstance.post(
+        `member/verifyPw`,
         { password },
-        {
-          baseURL: "https://dev.moviepunk.p-e.kr",
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
     );
     return response.data.isValid;
   } catch (error) {
@@ -107,11 +75,8 @@ export const verifyPassword = async (password: string): Promise<boolean> => {
 // 닉네임 중복체크를 위해 입력된 '닉네임' 서버에 보내서 중복되는지 검증
 export const checkNicknameDuplicate = async (nickname: string): Promise<boolean> => {
   try {
-    const response = await axios.get(`/api/member/checkNickname`, {
+    const response = await axiosInstance.get(`member/checkNickname`, {
       params: { nickname },
-      baseURL: "https://dev.moviepunk.p-e.kr",
-      headers: { "Content-Type": "application/json" },
-      withCredentials: true,
     });
     return response.data.isDuplicate;
   } catch (error) {
@@ -120,14 +85,54 @@ export const checkNicknameDuplicate = async (nickname: string): Promise<boolean>
   }
 };
 
+// 업데이트
+export const updateMember = async (updatePayload: any) => {
+  try {
+    const { data } = await axiosInstance.put<{ message: string; member: Member }>(
+        "/member/update",
+        updatePayload,
+    );
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      console.error("서버 응답 에러:", error.response.data);
+      throw new Error("개인정보 수정 중 오류가 발생했습니다.");
+    } else {
+      console.error("예상치 못한 에러:", error);
+      throw new Error("예상치 못한 오류가 발생했습니다.");
+    }
+  }
+};
+
+// 서버로 회원 삭제 요청을 보내는 함수
+export const deleteMember = async (memberNo: number) => {
+  try {
+    const response = await axiosInstance.delete<{ message: string }>(
+        `/member/delete/${memberNo}`,
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (error.response) {
+        console.error("서버 응답 에러:", error.response.data);
+        throw new Error(error.response.data.message || "멤버 삭제 중 오류가 발생했습니다.");
+      } else {
+        console.error("요청 에러:", error.message);
+        throw new Error("요청 중 오류가 발생했습니다.");
+      }
+    } else {
+      console.error("예상치 못한 에러:", error);
+      throw new Error("예상치 못한 오류가 발생했습니다.");
+    }
+  }
+};
+
 // otherProfile 유저 정보 가져오기
 export const getOtherMemberDetails = async (nickname: string | null | undefined): Promise<Member> => {
   try {
-    const response = await axios.get('/api/member/otherProfile', {
+    const response = await axiosInstance.get(`member/otherProfile`, {
       params: { nickname },
-      baseURL: "https://dev.moviepunk.p-e.kr",
-      headers: { "Content-Type": "application/json" },
-      withCredentials: true,
+
     });
     console.log(response);
     return response.data;
