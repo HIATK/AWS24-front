@@ -8,6 +8,7 @@ import { useAuth } from "@/(context)/AuthContext";
 import { deletePost, getPostsByMemberNo } from "@/_Service/PostService";
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
+import {getMemberImage} from "@/_Service/MemberService";
 
 interface PostListProps {
   posts: PostDetails[];
@@ -29,6 +30,7 @@ const PostList: React.FC<PostListProps> = ({
   const observerRef = useRef<HTMLDivElement | null>(null);
   const observer = useRef<IntersectionObserver | null>(null);
   const router = useRouter();
+  const [profileImage, setProfileImage] = useState<{ [key: number]: string | null }>({});
 
   const handleClick = useCallback(async (post: PostDetails) => {
     console.log('포스트멤버닉'+post.memberNick);
@@ -65,6 +67,43 @@ const PostList: React.FC<PostListProps> = ({
     };
   }, [displayedPosts]);
 
+  const fetchProfileImages = async (posts) => {
+    const images = await Promise.all(
+        posts.map(async (post) => {
+          if (post.memberNo) {
+            try {
+              const image = await getMemberImage(post.memberNo);
+              return { postId: post.postId, image };
+            } catch (error) {
+              console.error(`Error fetching profile image for postId ${post.postId}:`, error);
+              return { postId: post.postId, image: null };
+            }
+          }
+          return { postId: post.postId, image: null };
+        })
+    );
+
+    return images.reduce((acc, { postId, image }) => {
+      acc[postId] = image;
+      return acc;
+    }, {} as { [key: number]: string | null });
+  };
+
+  useEffect(() => {
+    const loadImages = async () => {
+      const imageMap = await fetchProfileImages(posts);
+      setProfileImage(imageMap);
+    };
+
+    if (displayedPosts.length === 0) {
+      const initialPosts = posts.slice(0, postIndex);
+      setDisplayedPosts(initialPosts);
+      loadImages();
+    } else {
+      loadImages();
+    }
+  }, [posts]);
+
   const loadMorePosts = () => {
     const newPosts = posts.slice(postIndex, postIndex + 5);
     setDisplayedPosts((prevPosts) => [...prevPosts, ...newPosts]);
@@ -88,14 +127,6 @@ const PostList: React.FC<PostListProps> = ({
   const toggleExpand = (postId: number) => {
     setExpandedPost(expandedPost === postId ? null : postId);
   };
-
-  // 수정된 부분 start
-  // `removeBasePath` 함수 수정
-  const removeBasePath = (filePath: string) => {
-    // 로컬 파일 경로를 사용하지 않고 상대 경로를 리턴
-    return filePath.replace(/^.*\/public\/profile\//, "");
-  };
-  // 수정된 부분 end 
 
   const handleDeletePost = async (postId: number) => {
     try {
@@ -128,7 +159,7 @@ const PostList: React.FC<PostListProps> = ({
                 {/* 프로필 이미지 표시*/}
                 <div className={styles.profileImage}>
                   <Image
-                      src={`/profile/${removeBasePath(post.filePath)}`}
+                      src={profileImage[post.postId] || '/profile/basic.png'}
                       alt={`Profile image for post ${post.postId}`}
                       className={styles.profileImage}
                       layout="responsive" // 이 속성은 필요에 따라 조절
