@@ -26,7 +26,6 @@ const PostList: React.FC<PostListProps> = ({
   const [expandedPost, setExpandedPost] = useState<number | null>(null);
   const [displayedPosts, setDisplayedPosts] = useState<PostDetails[]>([]);
   const [postIndex, setPostIndex] = useState(5);
-  const [profileImages, setProfileImages] = useState<{ [key: number]: string}>({});
   const observerRef = useRef<HTMLDivElement | null>(null);
   const observer = useRef<IntersectionObserver | null>(null);
   const router = useRouter();
@@ -39,26 +38,11 @@ const PostList: React.FC<PostListProps> = ({
     }, 100)
   }, [closeModal]);
 
-    //  특정 회원의 프로필 이미지 가져오기
-    const fetchProfileImage = useCallback(async (memberNo : number) => {
-      try {
-        //  해당 서비스 메서드가 있어야 함
-        const imageUrl = await getPostsByMemberNo(memberNo);
-        setProfileImages(prev => ({ ...prev, [memberNo]: imageUrl}));
-      } catch (error) {
-        console.error('프로필 이미지 가져오기 실패', error);
-      }
-    }, []);
-
   useEffect(() => {
     const initialPosts = posts.slice(0, postIndex);
     setDisplayedPosts(initialPosts);
 
-      //  포스트의 작성자 번호를 기준으로 프로필 이미지 가져오기
-    const memberNum = Array.from(new Set(posts.map(post => post.memberNo)));
-    memberNum.forEach(memberNo => fetchProfileImage(memberNo));
-
-  }, [posts, postIndex, fetchProfileImage]);
+  }, [posts, postIndex]);
 
   useEffect(() => {
     if (observer.current) observer.current.disconnect();
@@ -105,6 +89,13 @@ const PostList: React.FC<PostListProps> = ({
     setExpandedPost(expandedPost === postId ? null : postId);
   };
 
+  // 수정된 부분 start
+  // `removeBasePath` 함수 수정
+  const removeBasePath = (filePath: string) => {
+    // 로컬 파일 경로를 사용하지 않고 상대 경로를 리턴
+    return filePath.replace(/^.*\/public\/profile\//, "");
+  };
+  // 수정된 부분 end 
 
   const handleDeletePost = async (postId: number) => {
     try {
@@ -136,15 +127,15 @@ const PostList: React.FC<PostListProps> = ({
                 </div>
                 {/* 프로필 이미지 표시*/}
                 <div className={styles.profileImage}>
-              <Image
-                src={profileImages[post.memberNo] || '/profile/basic.png'} // 기본 이미지 로드
-                alt={`Post ${post.postId}의 프로필 이미지`}
-                className={styles.profileImage}
-                layout="responsive" // 필요에 따라 조정
-                width={100}
-                height={100}
-              />
-            </div>
+                  <Image
+                      src={`/profile/${removeBasePath(post.filePath)}`}
+                      alt={`Profile image for post ${post.postId}`}
+                      className={styles.profileImage}
+                      layout="responsive" // 이 속성은 필요에 따라 조절
+                      width={100} // 적절한 너비
+                      height={100} // 적절한 높이
+                  />
+                </div>
                 {/* 추가한 부분 end */}
                 <button onClick={() => handleClick(post)} className={styles.postNickButton}>{post.memberNick}</button>
                 <div
