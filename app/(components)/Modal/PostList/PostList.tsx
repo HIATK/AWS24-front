@@ -67,7 +67,7 @@ const PostList: React.FC<PostListProps> = ({
     };
   }, [displayedPosts]);
 
-  const fetchProfileImages = async (posts) => {
+  const fetchProfileImages = async (posts: any[]) => {
     const images = await Promise.all(
         posts.map(async (post) => {
           if (post.memberNo) {
