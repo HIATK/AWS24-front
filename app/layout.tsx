@@ -24,26 +24,24 @@ export default function RootLayout({
   modal: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
-      <head>
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8395468797693752"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
-        </head>
+      <html lang="ko">
+
+      <ins className="kakao_ad_area" style="display:none;"
+           data-ad-unit="DAN-DzZI3sPmCg6gwdzj"
+           data-ad-width="160"
+           data-ad-height="600"></ins>
+      <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 
       <body>
       <ThemeProvider>
           <AuthProvider>
-          <Sidebar />
-            {children}          
-            {modal}
-          <div id="modal-root"></div>
+              <Sidebar/>
+              {children}
+              {modal}
+              <div id="modal-root"></div>
           </AuthProvider>
       </ThemeProvider>
       </body>
-    </html>
+      </html>
   );
 }
