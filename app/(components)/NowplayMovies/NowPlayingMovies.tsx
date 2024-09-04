@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
-import styles from ' ./NowplayingMovies.module.css';
+import styles from './NowPlayingMovies.module.css';
 import { getNowPlaying } from "@/_Service/MovieService";
 
 type Movie = {
@@ -65,7 +65,8 @@ export default function NowPlayingMovies() {
           style={{ transform: `translateX(${translateX}px)` }}
         >
           {movies.map((movie, index) => (
-            <div
+
+<div
               key={movie.id}
               className={`${styles.movieItem} ${index < MOVIES_PER_PAGE ? (loadedImages > index ? styles.loaded : styles.loading) : ''}`}
             >
