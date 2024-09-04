@@ -26,12 +26,6 @@ export default function RootLayout({
   return (
       <html lang="ko">
 
-      <ins className="kakao_ad_area" style="display:none;"
-           data-ad-unit="DAN-DzZI3sPmCg6gwdzj"
-           data-ad-width="160"
-           data-ad-height="600"></ins>
-      <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
-
       <body>
       <ThemeProvider>
           <AuthProvider>
@@ -41,6 +35,19 @@ export default function RootLayout({
               <div id="modal-root"></div>
           </AuthProvider>
       </ThemeProvider>
+
+      <ins
+          className="kakao_ad_area"
+          style={{display: "none"}}
+          data-ad-unit="DAN-DzZI3sPmCg6gwdzj"
+          data-ad-width="160"
+          data-ad-height="600"
+      ></ins>
+      <Script
+          src="//t1.daumcdn.net/kas/static/ba.min.js"
+          strategy="beforeInteractive"
+          async
+      />
       </body>
       </html>
   );
