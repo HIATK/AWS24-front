@@ -162,7 +162,7 @@ export const getMemberImage = async (memberNo: number): Promise<string> => {
   return "/profile/basic.png";
 }
 
-export const deleteMemberImage = async (member) => {
+export const deleteMemberImage = async (member: Member) => {
   try {
     await axios.delete(`/api/image/delete/${member?.memberNo}`);
     console.log("기존 프로필 사진 삭제 성공")
