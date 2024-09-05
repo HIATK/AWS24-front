@@ -8,7 +8,10 @@ import {
   updateLikeStatus,
   fetchLikeCounts,
 } from "@/_Service/LikeService";
-import { getVideosByMovieId, getMoviesByMovieId } from "@/_Service/MovieService";
+import {
+  getVideosByMovieId,
+  getMoviesByMovieId,
+} from "@/_Service/MovieService";
 
 interface MovieHeaderProps {
   movie: MovieDetails;
@@ -91,7 +94,7 @@ const MovieHeader: React.FC<MovieHeaderProps> = ({ movie, averageRating }) => {
       setLikesCount(count);
 
       // CustomEvent 디스패치
-      const event = new CustomEvent('refreshMovies');
+      const event = new CustomEvent("refreshMovies");
       window.dispatchEvent(event);
     } catch (err) {
       setError("좋아요 상태 업데이트 실패");
@@ -101,75 +104,80 @@ const MovieHeader: React.FC<MovieHeaderProps> = ({ movie, averageRating }) => {
   };
 
   return (
-    <div className={styles.header}>
-      <div className={styles.topSection}>
-        <div className={styles.posterWrapper}>
-          <img
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            alt={`Poster for ${movie.title}`}
-            className={styles.poster}
-          />
-          <div className={styles.ratingLikeSection}>
+      <div className={styles.header}>
+        <div className={styles.topSection}>
+          <div className={styles.posterWrapper}>
+            <img
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                alt={`Poster for ${movie.title}`}
+                className={styles.poster}
+            />
+            <div className={styles.ratingLikeSection}>
             <span className={styles.averageRating}>
               <FaStar /> {averageRating.toFixed(1)}
             </span>
-            <button
-              className={`${styles.likeButton} ${liked ? styles.liked : ""}`}
-              onClick={handleLikeClick}
-              disabled={loading}
-            >
-              {liked ? <FaHeart /> : <FaRegHeart />}
-              <span className={styles.likesCount}>{likesCount}</span>
-            </button>
-          </div>
-        </div>
-        {loadingContent ? (
-          <div className={styles.loader}></div>
-        ) : videoKey ? (
-          <div className={styles.video}>
-            <div className={styles.iframeContainer}>
-              <iframe
-                className={styles.iframe}
-                src={`https://www.youtube.com/embed/${videoKey}`}
-                title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
+              <button
+                  className={`${styles.likeButton} ${liked ? styles.liked : ""}`}
+                  onClick={handleLikeClick}
+                  disabled={loading}
+              >
+                {liked ? <FaHeart /> : <FaRegHeart />}
+                <span className={styles.likesCount}>{likesCount}</span>
+              </button>
             </div>
           </div>
-        ) : images.length > 1 ? (
-          <div className={styles.imageSlider}>
-            {images.map((image, index) => (
-              <img
-                key={index}
-                src={`https://image.tmdb.org/t/p/w500${image}`}
-                alt="Movie backdrop"
-                className={`${styles.sliderImage} ${
-                  index === currentImageIndex ? styles.active : ""
-                } ${
-                  index === (currentImageIndex - 1 + images.length) % images.length ? styles.prev : ""
-                } ${
-                  index === (currentImageIndex + 1) % images.length ? styles.next : ""
-                }`}
-              />
-            ))}
-          </div>
-        ) : images.length === 1 ? (
-          <div className={styles.singleImageWrapper}>
-            <img
-              src={`https://image.tmdb.org/t/p/w500${images[0]}`}
-              alt="Movie backdrop"
-              className={styles.singleImage}
-            />
-          </div>
-        ) : null}
+          {loadingContent ? (
+              <div className={styles.loader}></div>
+          ) : videoKey ? (
+              <div className={styles.video}>
+                <div className={styles.iframeContainer}>
+                  <iframe
+                      className={styles.iframe}
+                      src={`https://www.youtube.com/embed/${videoKey}`}
+                      title="YouTube video player"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
+          ) : images.length > 1 ? (
+              <div className={styles.imageSlider}>
+                {images.map((image, index) => (
+                    <img
+                        key={index}
+                        src={`https://image.tmdb.org/t/p/w500${image}`}
+                        alt="Movie backdrop"
+                        className={`${styles.sliderImage} ${
+                            index === currentImageIndex ? styles.active : ""
+                        } ${
+                            index ===
+                            (currentImageIndex - 1 + images.length) % images.length
+                                ? styles.prev
+                                : ""
+                        } ${
+                            index === (currentImageIndex + 1) % images.length
+                                ? styles.next
+                                : ""
+                        }`}
+                    />
+                ))}
+              </div>
+          ) : images.length === 1 ? (
+              <div className={styles.singleImageWrapper}>
+                <img
+                    src={`https://image.tmdb.org/t/p/w500${images[0]}`}
+                    alt="Movie backdrop"
+                    className={styles.singleImage}
+                />
+              </div>
+          ) : null}
+        </div>
+        <div className={styles.movieInfo}>
+          <h1>{movie.title}</h1>
+          <p>{movie.overview}</p>
+          {error && <p className={styles.error}>{error}</p>}
+        </div>
       </div>
-      <div className={styles.movieInfo}>
-        <h1>{movie.title}</h1>
-        <p>{movie.overview}</p>
-        {error && <p className={styles.error}>{error}</p>}
-      </div>
-    </div>
   );
 };
 
