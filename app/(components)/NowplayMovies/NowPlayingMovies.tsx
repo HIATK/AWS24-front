@@ -119,24 +119,6 @@ export default function NowPlayingMovies() {
             className={`${styles.navButton} ${page === 0 ? styles.hidden : ""}`}
             disabled={page === 0}
         >
-<<<<<<< HEAD
-          {movies.map((movie, index) => (
-
-<div
-              key={movie.id}
-              className={`${styles.movieItem} ${index < MOVIES_PER_PAGE ? (loadedImages > index ? styles.loaded : styles.loading) : ''}`}
-            >
-              <Link href={`/movies/details/${movie.id}`}>
-                <img
-                  src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
-                  alt={`Poster for ${movie.title}`}
-                  className={`${styles.movieImg}`}
-                  onLoad={handleImageLoad}
-                />
-              </Link>
-            </div>
-          ))}
-=======
           <IoIosArrowDropleft />
         </button>
         <div className={styles.sliderWrapper}>
@@ -183,7 +165,6 @@ export default function NowPlayingMovies() {
                 </div>
             ))}
           </div>
->>>>>>> refs/remotes/origin/main
         </div>
         <button
             onClick={handleNextClick}
