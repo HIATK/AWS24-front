@@ -4,7 +4,8 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
 import { FaHeart, FaRegHeart, FaStar } from "react-icons/fa";
-import styles from "./NowPlayingMovies.module.css";
+// import styles from "./NowPlayingMovies.module.css";
+import styles from "./NowplayingMovies.module.css";
 import { getNowPlaying } from "@/_Service/MovieService";
 import {
   fetchLikeStatus,
