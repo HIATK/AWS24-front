@@ -52,7 +52,7 @@ const Search = () => {
 
   useEffect(() => {
     const currentURL = window.location.href;
-    const expectedURL = `https://www.moviepunk.o-r.kr/movies/search?keyword=${encodeURIComponent(searchTerm)}`;
+    const expectedURL = `https://www.moviepunk.p-e.kr/movies/search?keyword=${encodeURIComponent(searchTerm)}`;
 
     if (currentURL === expectedURL && (prevSearchTermRef.current !== searchTerm || !initialFetchRef.current)) {
       resetSearch();
