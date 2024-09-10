@@ -23,7 +23,7 @@ const Search = () => {
   const fetchResults = async (searchTerm: string, page: number) => {
     setLoading(true);
     try {
-      const response = await fetch(`https://dev.moviepunk.o-r.kr/api/movies/search?keyword=${encodeURIComponent(searchTerm)}&page=${page}`);
+      const response = await fetch(`https://dev.moviepunk.p-e.kr/api/movies/search?keyword=${encodeURIComponent(searchTerm)}&page=${page}`);
       if (response.ok) {
         const data = await response.json();
         if (Array.isArray(data)) {
